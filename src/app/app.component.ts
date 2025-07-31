@@ -15,9 +15,11 @@ import { GameStore } from './state/game.store';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  board: Board = [];
+  board: Board = Array.from({ length: 9 }, () => Array(9).fill(0));
   solution: Board = [];
-  editableCells: boolean[][] = [];
+  editableCells: boolean[][] = Array.from({ length: 9 }, () =>
+    Array(9).fill(true)
+  );
   difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'random'];
   selectedDifficulty: Difficulty = 'easy';
 
@@ -33,6 +35,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.gameStore.board$.subscribe((board) => {
       this.board = board;
+      this.buildEditableMatrix();
     });
 
     this.loadNewBoard();
@@ -42,7 +45,6 @@ export class AppComponent implements OnInit {
     this.sudokuService.getBoard(this.selectedDifficulty).subscribe((res) => {
       this.gameStore.setBoard(res.board);
       this.solution = JSON.parse(JSON.stringify(res.board));
-      this.buildEditableMatrix();
       this.resetTimer();
       this.startTimer();
       this.statusMessage = '';

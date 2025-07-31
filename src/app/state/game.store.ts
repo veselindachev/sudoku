@@ -4,7 +4,9 @@ import { Board } from '../models/board.model';
 
 @Injectable({ providedIn: 'root' })
 export class GameStore {
-  private _board$ = new BehaviorSubject<Board>([]);
+  private _board$ = new BehaviorSubject<Board>(
+    Array.from({ length: 9 }, () => Array(9).fill(0))
+  );
   board$ = this._board$.asObservable();
 
   setBoard(board: Board) {
