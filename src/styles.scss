@@ -1,80 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Apply universal box-sizing for consistent layout across all elements */
 * {
   box-sizing: border-box;
 }
 
+/* Basic styling for the body element */
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f9f9f9;
-  color: #222;
+  margin: 0; /* Remove default margin */
+  font-family: Arial, Helvetica, sans-serif; /* Set primary font stack */
+  background: #f9f9f9; /* Light gray background */
+  color: #222; /* Dark text color for good contrast */
 }
 
+/* Style for all buttons */
 button {
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  background-color: #4a90e2;
-  color: white;
-  transition: background-color 0.3s ease;
+  cursor: pointer; /* Show pointer cursor on hover */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #4a90e2; /* Default button color */
+  color: white; /* Button text color */
+  transition: background-color 0.3s ease; /* Smooth background change on hover */
 
+  /* Style when hovering over the button */
   &:hover {
-    background-color: #357ac6;
+    background-color: #357ac6; /* Darker shade on hover */
   }
 
+  /* Style for disabled buttons */
   &:disabled {
-    background-color: #999;
-    cursor: not-allowed;
+    background-color: #999; /* Gray color for disabled state */
+    cursor: not-allowed; /* Show not-allowed cursor */
   }
 }
 
+/* Basic input styling */
 input {
-  outline: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  outline: none; /* Remove default outline on focus */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Rounded corners */
 }
 
-/* Mobile styles */
+/* ============================
+   Mobile Styles (max-width: 600px)
+   ============================ */
 @media (max-width: 600px) {
   body {
-    font-size: 16px;
-    padding: 8px;
+    font-size: 16px; /* Smaller font size for mobile */
+    padding: 8px; /* Reduced padding on smaller screens */
   }
 
+  /* Sudoku board styling for mobile */
   .sudoku-board {
-    width: 100vw;
-    max-width: 100%;
-    min-width: unset;
-    margin: 0 auto;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(9, 1fr);
+    width: 100vw; /* Full viewport width */
+    max-width: 100%; /* Ensure it doesn't overflow */
+    min-width: unset; /* Remove any minimum width constraints */
+    margin: 0 auto; /* Center the board horizontally */
+    grid-template-columns: repeat(9, 1fr); /* 9 columns of equal width */
+    grid-template-rows: repeat(9, 1fr); /* 9 rows of equal height */
   }
 
+  /* Individual cell styling for mobile */
   .sudoku-cell {
-    font-size: 1.2rem;
-    min-width: 28px;
-    min-height: 28px;
+    font-size: 1.2rem; /* Slightly larger font for visibility */
+    min-width: 28px; /* Minimum width for touch targets */
+    min-height: 28px; /* Minimum height for touch targets */
   }
 }
 
-/* Desktop styles */
+/* ============================
+   Desktop Styles (min-width: 601px)
+   ============================ */
 @media (min-width: 601px) {
   body {
-    font-size: 18px;
-    padding: 24px;
+    font-size: 18px; /* Larger font size for readability on larger screens */
+    padding: 24px; /* More padding for better layout */
   }
 
+  /* Sudoku board styling for desktop */
   .sudoku-board {
-    width: 450px;
-    max-width: 100%;
-    margin: 0 auto;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(9, 1fr);
+    width: 450px; /* Fixed width for better layout */
+    max-width: 100%; /* Prevent overflow */
+    margin: 0 auto; /* Center the board horizontally */
+    grid-template-columns: repeat(9, 1fr); /* 9 equal columns */
+    grid-template-rows: repeat(9, 1fr); /* 9 equal rows */
   }
 
+  /* Individual cell styling for desktop */
   .sudoku-cell {
-    font-size: 1.5rem;
-    min-width: 40px;
+    font-size: 1.5rem; /* Larger font for better visibility */
+    min-width: 40px; /* Larger cells for ease of interaction */
     min-height: 40px;
   }
 }

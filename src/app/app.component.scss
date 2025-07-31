@@ -1,32 +1,38 @@
+// Main container styling - centers content and adds padding
 .container {
   text-align: center;
   padding: 20px;
 
+  // Header styling (e.g., main title)
   h1 {
     margin-bottom: 10px;
     font-size: 2rem;
   }
 
+  // Shared styles for both controls and actions sections
   .controls,
   .actions {
-    margin: 10px 0;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    margin: 10px 0; // Vertical spacing
+    display: flex; // Flexbox layout for inline elements
+    justify-content: center; // Center content horizontally
+    gap: 10px; // Space between child elements
 
+    // Styling for <select> dropdowns and buttons inside controls/actions
     select,
     button {
       font-size: 1rem;
-      padding: 6px 10px;
+      padding: 6px 10px; // Comfortable clickable area
     }
 
+    // Specific styling for toggle button group in multiplayer mode
     .multi-toggle {
       display: flex;
-      align-items: center;
-      gap: 5px;
+      align-items: center; // Vertically align toggle elements
+      gap: 5px; // Space between toggle elements
     }
   }
 
+  // Game status display (e.g., time, validation messages)
   .status {
     margin: 10px 0;
     font-weight: bold;
@@ -34,31 +40,38 @@
     justify-content: center;
     gap: 20px;
 
+    // Message text (e.g., success or error messages)
     .message {
-      color: #4a90e2;
+      color: #4a90e2; // Blue tone for info or notifications
     }
   }
 
+  // Loading message styling (shown during async operations)
   .loading {
     margin: 20px 0;
     font-size: 1.2rem;
   }
 
+  // Multiplayer-specific styles
   .multiplayer {
     margin: 10px 0;
+
+    // Container for player indicators
     .players {
       display: flex;
       justify-content: center;
-      gap: 200px;
+      gap: 200px; // Wide space between player elements (for visual balance)
 
+      // Highlight active player's section
       div.active {
         font-weight: bold;
       }
     }
 
+    // Text indicating which player's turn it is
     .turn {
       margin: 20px 0px 20px 0px;
-      font-style: italic;
+      font-style: italic; // Emphasizes the player's turn
     }
   }
 }
