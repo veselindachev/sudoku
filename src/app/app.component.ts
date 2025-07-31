@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   selectedDifficulty: Difficulty = 'easy';
 
   timer: number = 0;
-  intervalId: any = null;
+  intervalId: ReturnType<typeof setInterval> | null = null;
   statusMessage: string = '';
   isLoading = false;
 
