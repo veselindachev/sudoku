@@ -8,10 +8,11 @@ import {
   SudokuRequest,
   ValidateResponse,
 } from '../models/board.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SudokuService {
-  private readonly API_BASE = 'https://sugoku.onrender.com';
+  private readonly API_BASE = environment.apiBase;
 
   constructor(private http: HttpClient) {}
 
