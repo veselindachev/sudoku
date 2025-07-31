@@ -1,28 +1,33 @@
+// Container for the entire Sudoku grid
 .sudoku-grid {
-  display: grid;
-  grid-template-rows: repeat(9, 1fr);
-  max-width: 400px;
-  margin: 0 auto;
-  gap: 2px;
+  display: grid; // Use CSS Grid layout
+  grid-template-rows: repeat(9, 1fr); // Create 9 equal-height rows
+  max-width: 400px; // Limit the total width of the grid
+  margin: 0 auto; // Center the grid horizontally
+  gap: 2px; // Small gap between rows (and between cells inside them)
 
+  // Each row in the Sudoku grid
   .row {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    display: grid; // Each row is also a grid
+    grid-template-columns: repeat(9, 1fr); // 9 equal-width columns per row
   }
 
+  // Individual cell in the grid
   .cell {
+    // Targeting the input inside each cell
     input {
-      width: 100%;
-      height: 40px;
-      font-size: 1.2rem;
-      text-align: center;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
+      width: 100%; // Full width of the cell
+      height: 40px; // Fixed height for consistency
+      font-size: 1.2rem; // Slightly larger font for visibility
+      text-align: center; // Center the text inside the input
+      border: 1px solid #ccc; // Light gray border for each input
+      box-sizing: border-box; // Ensure padding/border are included in width/height
     }
 
+    // Styles for pre-filled (non-editable) cells
     &.prefilled input {
-      background-color: #eee;
-      font-weight: bold;
+      background-color: #eee; // Light gray background to indicate pre-filled cell
+      font-weight: bold; // Make the font bold for distinction
     }
   }
 }
