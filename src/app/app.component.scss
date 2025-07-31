@@ -19,6 +19,12 @@
       font-size: 1rem;
       padding: 6px 10px;
     }
+
+    .multi-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
   }
 
   .status {
@@ -30,6 +36,29 @@
 
     .message {
       color: #4a90e2;
+    }
+  }
+
+  .loading {
+    margin: 20px 0;
+    font-size: 1.2rem;
+  }
+
+  .multiplayer {
+    margin: 10px 0;
+    .players {
+      display: flex;
+      justify-content: center;
+      gap: 200px;
+
+      div.active {
+        font-weight: bold;
+      }
+    }
+
+    .turn {
+      margin: 20px 0px 20px 0px;
+      font-style: italic;
     }
   }
 }
