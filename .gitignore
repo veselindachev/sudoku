@@ -12,7 +12,6 @@ src/**/*.js.map
 
 # Node
 /node_modules
-package-lock.json
 npm-debug.log
 yarn-error.log
 
@@ -45,3 +44,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+package-lock.json
