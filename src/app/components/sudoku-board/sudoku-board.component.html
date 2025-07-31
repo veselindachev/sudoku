@@ -1,0 +1,9 @@
+<div class="sudoku-grid">
+    <div class="row" *ngFor="let row of board; let rowIndex = index">
+        <div class="cell" *ngFor="let cell of row; let colIndex = index"
+            [class.prefilled]="!editableCells[rowIndex][colIndex]">
+            <input type="text" maxlength="1" [readonly]="!editableCells[rowIndex][colIndex]"
+                [value]="cell !== 0 ? cell : ''" (input)="onInputChange($event, rowIndex, colIndex)" />
+        </div>
+    </div>
+</div>

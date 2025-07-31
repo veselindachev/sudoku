@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>🧩 Angular Sudoku</h1>
+
+  <div class="controls">
+    <label for="difficulty">Difficulty:</label>
+    <select [(ngModel)]="selectedDifficulty" id="difficulty">
+      <option *ngFor="let level of difficulties" [value]="level">{{ level }}</option>
+    </select>
+    <button (click)="loadNewBoard()">New Game</button>
+  </div>
+
+  <div class="status">
+    <span>⏱ {{ formattedTime }}</span>
+    <span class="message">{{ statusMessage }}</span>
+  </div>
+
+  <app-sudoku-board [board]="board" [editableCells]="editableCells"
+    (cellChanged)="onCellChanged($event)"></app-sudoku-board>
+
+  <div class="actions">
+    <button (click)="validateBoard()">Validate</button>
+    <button (click)="solveBoard()">Solve</button>
+  </div>
+</div>

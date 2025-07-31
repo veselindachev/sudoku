@@ -1,1 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f9f9f9;
+  color: #222;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #4a90e2;
+  color: white;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #357ac6;
+  }
+
+  &:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+}
+
+input {
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Mobile styles */
+@media (max-width: 600px) {
+  body {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .sudoku-board {
+    width: 100vw;
+    max-width: 100%;
+    min-width: unset;
+    margin: 0 auto;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+  }
+
+  .sudoku-cell {
+    font-size: 1.2rem;
+    min-width: 28px;
+    min-height: 28px;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 601px) {
+  body {
+    font-size: 18px;
+    padding: 24px;
+  }
+
+  .sudoku-board {
+    width: 450px;
+    max-width: 100%;
+    margin: 0 auto;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+  }
+
+  .sudoku-cell {
+    font-size: 1.5rem;
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
