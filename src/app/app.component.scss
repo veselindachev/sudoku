@@ -37,4 +37,22 @@
     margin: 20px 0;
     font-size: 1.2rem;
   }
+
+  .multiplayer {
+    margin: 10px 0;
+    .players {
+      display: flex;
+      justify-content: center;
+      gap: 130px;
+
+      div.active {
+        font-weight: bold;
+      }
+    }
+
+    .turn {
+      margin-top: 5px;
+      font-style: italic;
+    }
+  }
 }

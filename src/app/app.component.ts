@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { SudokuBoardComponent } from './components/sudoku-board/sudoku-board.component';
 import { SudokuService } from './services/sudoku.service';
 import { Board, Difficulty } from './models/board.model';
+import { Player } from './models/player.model';
 import { GameStore } from './state/game.store';
 
 @Component({
@@ -21,6 +22,11 @@ export class AppComponent implements OnInit {
   editableCells: boolean[][] = Array.from({ length: 9 }, () =>
     Array(9).fill(true)
   );
+  players: Player[] = [
+    { name: 'Player 1', cellsFilled: 0 },
+    { name: 'Player 2', cellsFilled: 0 },
+  ];
+  currentPlayerIndex = 0;
   difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'random'];
   selectedDifficulty: Difficulty = 'easy';
 
@@ -52,6 +58,7 @@ export class AppComponent implements OnInit {
         this.gameStore.setBoard(res.board);
         this.solution = JSON.parse(JSON.stringify(res.board));
         this.buildEditableMatrix();
+        this.resetPlayers();
         this.resetTimer();
         this.startTimer();
         this.statusMessage = '';
@@ -65,7 +72,13 @@ export class AppComponent implements OnInit {
   }
 
   onCellChanged(event: { row: number; col: number; value: number }): void {
+    const previous = this.board[event.row][event.col];
     this.gameStore.updateCell(event.row, event.col, event.value);
+    if (previous === 0 && event.value !== 0) {
+      this.players[this.currentPlayerIndex].cellsFilled++;
+    }
+    this.currentPlayerIndex =
+      (this.currentPlayerIndex + 1) % this.players.length;
   }
 
   validateBoard(): void {
@@ -106,6 +119,11 @@ export class AppComponent implements OnInit {
   resetTimer(): void {
     this.stopTimer();
     this.timer = 0;
+  }
+
+  resetPlayers(): void {
+    this.players.forEach((p) => (p.cellsFilled = 0));
+    this.currentPlayerIndex = 0;
   }
 
   get formattedTime(): string {

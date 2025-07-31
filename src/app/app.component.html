@@ -16,6 +16,15 @@
 
   <div *ngIf="isLoading" class="loading">Loading board...</div>
 
+  <div class="multiplayer">
+    <div class="players">
+      <div *ngFor="let p of players; let i = index" [class.active]="i === currentPlayerIndex">
+        {{ p.name }}:  Turn {{ p.cellsFilled }}
+      </div>
+    </div>
+    <div class="turn">Turn: {{ players[currentPlayerIndex].name }}</div>
+  </div>
+
   <app-sudoku-board [board]="board" [editableCells]="editableCells"
     (cellChanged)="onCellChanged($event)"></app-sudoku-board>
 
