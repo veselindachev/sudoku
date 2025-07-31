@@ -6,7 +6,12 @@
     <select [(ngModel)]="selectedDifficulty" id="difficulty">
       <option *ngFor="let level of difficulties" [value]="level">{{ level }}</option>
     </select>
-    <button (click)="loadNewBoard()">New Game</button>
+
+    <label class="multi-toggle">
+      <input type="checkbox" [(ngModel)]="multiplayer" (change)="onMultiplayerToggle()" />
+      Multiplayer
+    </label>
+
   </div>
 
   <div class="status">
@@ -14,12 +19,10 @@
     <span class="message">{{ statusMessage }}</span>
   </div>
 
-  <div *ngIf="isLoading" class="loading">Loading board...</div>
-
-  <div class="multiplayer">
+  <div class="multiplayer" *ngIf="multiplayer">
     <div class="players">
       <div *ngFor="let p of players; let i = index" [class.active]="i === currentPlayerIndex">
-        {{ p.name }}:  Turn {{ p.cellsFilled }}
+        {{ p.name }}: Turn {{ p.cellsFilled }}
       </div>
     </div>
     <div class="turn">Turn: {{ players[currentPlayerIndex].name }}</div>
@@ -29,6 +32,7 @@
     (cellChanged)="onCellChanged($event)"></app-sudoku-board>
 
   <div class="actions">
+    <button (click)="loadNewBoard()">New Game</button>
     <button (click)="validateBoard()">Validate</button>
     <button (click)="solveBoard()">Solve</button>
   </div>

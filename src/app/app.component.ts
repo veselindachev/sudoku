@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   editableCells: boolean[][] = Array.from({ length: 9 }, () =>
     Array(9).fill(true)
   );
+  multiplayer = false;
   players: Player[] = [
     { name: 'Player 1', cellsFilled: 0 },
     { name: 'Player 2', cellsFilled: 0 },
@@ -74,11 +75,13 @@ export class AppComponent implements OnInit {
   onCellChanged(event: { row: number; col: number; value: number }): void {
     const previous = this.board[event.row][event.col];
     this.gameStore.updateCell(event.row, event.col, event.value);
-    if (previous === 0 && event.value !== 0) {
-      this.players[this.currentPlayerIndex].cellsFilled++;
+    if (this.multiplayer) {
+      if (previous === 0 && event.value !== 0) {
+        this.players[this.currentPlayerIndex].cellsFilled++;
+      }
+      this.currentPlayerIndex =
+        (this.currentPlayerIndex + 1) % this.players.length;
     }
-    this.currentPlayerIndex =
-      (this.currentPlayerIndex + 1) % this.players.length;
   }
 
   validateBoard(): void {
@@ -124,6 +127,10 @@ export class AppComponent implements OnInit {
   resetPlayers(): void {
     this.players.forEach((p) => (p.cellsFilled = 0));
     this.currentPlayerIndex = 0;
+  }
+
+  onMultiplayerToggle(): void {
+    this.resetPlayers();
   }
 
   get formattedTime(): string {
