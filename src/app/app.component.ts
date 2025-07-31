@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 
 import { SudokuBoardComponent } from './components/sudoku-board/sudoku-board.component';
 import { SudokuService } from './services/sudoku.service';
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
   timer: number = 0;
   intervalId: any = null;
   statusMessage: string = '';
+  isLoading = false;
 
   constructor(
     private sudokuService: SudokuService,
@@ -42,15 +44,20 @@ export class AppComponent implements OnInit {
   }
 
   loadNewBoard(): void {
-    this.sudokuService.getBoard(this.selectedDifficulty).subscribe((res) => {
-      this.gameStore.setBoard(res.board);
-      this.solution = JSON.parse(JSON.stringify(res.board));
-      this.resetTimer();
-      this.startTimer();
-      this.statusMessage = '';
+    this.isLoading = true;
+    this.sudokuService
+      .getBoard(this.selectedDifficulty)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe((res) => {
+        this.gameStore.setBoard(res.board);
+        this.solution = JSON.parse(JSON.stringify(res.board));
+        this.buildEditableMatrix();
+        this.resetTimer();
+        this.startTimer();
+        this.statusMessage = '';
 
-      console.log('Loaded board:', res.board);
-    });
+        console.log('Loaded board:', res.board);
+      });
   }
 
   buildEditableMatrix(): void {

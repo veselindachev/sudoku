@@ -14,6 +14,8 @@
     <span class="message">{{ statusMessage }}</span>
   </div>
 
+  <div *ngIf="isLoading" class="loading">Loading board...</div>
+
   <app-sudoku-board [board]="board" [editableCells]="editableCells"
     (cellChanged)="onCellChanged($event)"></app-sudoku-board>
 
