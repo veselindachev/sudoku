@@ -18,12 +18,18 @@ export class SudokuBoardComponent {
   }>();
 
   onInputChange(event: Event, row: number, col: number): void {
-    const input = (event.target as HTMLInputElement).value;
+    const element = event.target as HTMLInputElement;
+    const input = element.value;
     const num = parseInt(input, 10);
     if (!isNaN(num) && num >= 1 && num <= 9) {
       this.cellChanged.emit({ row, col, value: num });
     } else if (input === '') {
       this.cellChanged.emit({ row, col, value: 0 });
+    } else {
+      // Revert invalid characters so the view stays in sync with the board
+      element.value = this.board[row][col]
+        ? this.board[row][col].toString()
+        : '';
     }
   }
 }

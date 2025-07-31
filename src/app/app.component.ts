@@ -73,12 +73,16 @@ export class AppComponent implements OnInit {
     this.sudokuService.validateBoard(currentBoard).subscribe((res) => {
       this.statusMessage =
         res.status === 'solved' ? '✅ Correct!' : '❌ Incorrect, keep trying!';
+      if (res.status === 'solved') {
+        this.stopTimer();
+      }
     });
   }
 
   solveBoard(): void {
     this.sudokuService.solveBoard(this.solution).subscribe((res) => {
       this.gameStore.setBoard(res.solution);
+      this.editableCells = this.board.map((row) => row.map(() => false));
       this.stopTimer();
       this.statusMessage =
         res.status === 'solved'
@@ -93,7 +97,10 @@ export class AppComponent implements OnInit {
   }
 
   stopTimer(): void {
-    if (this.intervalId) clearInterval(this.intervalId);
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
   }
 
   resetTimer(): void {
